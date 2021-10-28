@@ -1,0 +1,78 @@
+DLL : Every node has reference to both prev and next.
+
+Class Node:
+    def __init__(self, data):
+        self.data = data
+        self.prev = None
+        self.next = None
+
+SLL Vs DLL
+
+DLL Advantages:
+    1. Can be traversed in both directions. From any node be can traverse in both directions.
+        Ex. Managing edit history in an editor Or browser history in browser.
+            Here, you need to do back-back-back and vice-versa
+    2. A given node can be deleted in O(1) time with given reference/pointer to it.
+    3. Insert/Delete before a given node in O(1) time. In SLL Insert/Delete after a given node
+        is allowed in O(1) time but before one is not allowed. 
+    4. Insert/Delete from both ends in O(1) time by maintaing tail. (All 4 operations in O(1) time)
+    5. Data Structure "Deque" allows you to add/delete at both ends.
+
+DLL Disadvantages:
+    1. Extra Space for prev
+    2. Code becomes complex
+
+
+Insert at Beginning of DLL
+
+    def insertBegin(head, x):
+        temp = Node(x)
+        if head is not None:
+            head.prev = temp
+        temp.next = head
+        return temp
+
+Insert at End of DLL
+
+    def insertEnd(head, x):
+        temp = Node(x)
+        head_copy = head
+        if head is None:
+            return temp
+        while head_copy.next is not None:
+            head_copy = head_copy.next
+        head_copy.next = temp
+        temp.prev = head_copy
+        return head
+
+Delete First Node of DLL
+
+    def deleteFirst(head):
+        if head is None or head.next is None:
+            return None
+        head = head.next
+        head.prev = None
+        return head
+
+Delete Last Node of DLL (Can be done in O(1) time if we maintain tail ptr)
+
+    def deleteLast(head):
+        if head is None or head.next is None:
+            return None
+        temp = head
+        while (temp.next.next is not None):
+            temp = temp.next
+        temp.next = None
+        return head
+
+Reverse a Doubly Linked List (The core idea is prev and next ptr gets interchanged)
+
+    def reverseDLL(head):
+        if head is None or head.next is None:
+            return head
+        curr = head
+        prev = None
+        while curr is not None:
+            curr.next, curr.prev = curr.prev, curr.next
+            curr = curr.prev
+        return prev
