@@ -46,7 +46,7 @@ We need to use this implementation only
 - dequeue - O(1)
 Since deque is based on DLL, and in DLL all 4 operations are O(1)
 ```python
-from collections import Queue
+from collections import deque
 q = deque()     # deque([])
 q.append(10)    # deque([10])
 q.append(20)    # deque([10, 20])
@@ -54,6 +54,7 @@ q.append(30)    # deque([10, 20, 30])
 print(q)
 print(q.popleft())  #deque([20, 30])
 q.append(40)        #deque([20, 30, 40])
+q.appendleft(10)    #deque([10, 20, 30, 40])
 print(q.popleft())
 print(len(q))       # size()
 print(q[0])         # getFront()
