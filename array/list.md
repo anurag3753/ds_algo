@@ -1,3 +1,9 @@
+# Main Topics:
+- Missing Numbers Questions (1->N) (swap sort)
+- Sliding Window
+- Query Processing [Needed to do pre-processing]
+- Multi Pointer :- 2 ptr, 3 ptr
+
 # Use Case for static arrays:
     - Storing and accessing sequential data
     - Temporarily storing objects
@@ -117,4 +123,3 @@ print(s1 is s2)     # o/p   True  (string pointitng to same memory location if v
     - Multiple values can be returned from python function as tuple
     - On the receiving end, you need to unpack the returned tuple
     - Comprehensions (List, Set, Dictionary) are available python comprehensions
- 

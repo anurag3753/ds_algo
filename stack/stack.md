@@ -67,6 +67,24 @@ Advantages/Disadvantages:
         - Reason : O(1) for both insert/delete
     - If we chosse LL end for insert/delete (even if we maintain tail pointer)
         - Then also Insert - O(1) But Deletion - O(n)
+
+## [Identification of Stack Question](https://www.youtube.com/watch?v=P1bAPZg5uaE&list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd):
+- If you are working on array question, try to think if it can be optimized using stack
+- If you get strong feeling of sorting array, then it could belong to Heap also.
+- If you had to write an O(n^2) loop such that j = Fn(i), then it is 100% candidate of stack
+```cpp
+for (int i = 0; i < n; i++) {
+    for (int j = 0; j < i; j++){
+    }
+}
+
+j : 0 to i, j++
+j : i to 0, j--
+j : i to n, j++
+j : n to i, j--
+
+All above 4 scenarios, you can apply stack
+```
 ```python
 class Node:
     def __init__(self, data):
