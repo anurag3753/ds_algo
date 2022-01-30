@@ -74,3 +74,40 @@ def reverse(arr, low, high):
         low += 1
         high -= 1
 ```
+
+## Find missing and duplicate number
+[gfg](https://www.geeksforgeeks.org/find-a-repeating-and-a-missing-number/)
+```python
+eq1 : missing - duplicate => sum(1..n) - sum(arr)
+eq2 : 
+```
+
+## Find Missing and Duplicate Number in an Array of 1 to N | Swap Sort Need
+[youtube](https://www.youtube.com/watch?v=uo4kuV3pWfE&list=PL_z_8CaSLPWdJfdZHiNYYM46tYQUjbBJx&index=3)
+### Swap Sort O(n)
+    - It contains 2 parts
+    - Preprocessing
+    - Calculation
+
+```python
+# Ideal Case :- arr[i] == i+1
+
+arr = [2,3,1,5,1]
+n = len(arr)
+
+i = 0
+while (i < n):
+    if arr[i] != arr[arr[i]-1]:
+        # swap arr[i], arr[arr[i]-1]
+        temp = arr[arr[i]-1]
+        arr[arr[i]-1] = arr[i]
+        arr[i] = temp
+    else:
+        i += 1
+
+for i in range(n):
+    if arr[i] != i+1:
+        missing, duplicate = i+1, arr[i]
+
+print(missing, duplicate)
+```
