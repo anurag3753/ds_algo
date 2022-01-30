@@ -3,7 +3,7 @@
 ```python
 # To avoid overflow in Binary search
 mid = ( low + high ) // 2 
-mid = low + (high - low)//2    # Will prevent stack overflow, useful in languages like c++
+mid = low + (high - low)//2    # Will prevent integer overflow error, useful in languages like c++
 ```
 
 ## Binary Search
@@ -59,12 +59,13 @@ def last_occurence(arr, n , item):
 
 ## Find Minimum in Rotated Sorted Array
 [leetcode](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/submissions/) <br>
-[youtube](https://www.youtube.com/watch?v=4WmTRFZilj8&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=7) Related Concept but applicable in next question <br>
+[youtube](https://www.youtube.com/watch?v=4WmTRFZilj8&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=7) ```Related Concept but applicable in next question``` <br>
 [pepcoding](https://www.youtube.com/watch?v=Kcj2NGnuSNg&list=PL-Jc9J83PIiHhXKonZxk7gbEWsmSYP5kq&index=15)
 - Please check both videos and leetcode submission for details
 
 ## Number of times an array is rotated
-[youtube](https://www.youtube.com/watch?v=4WmTRFZilj8&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=7) Valid for unique and clockwise rotated array.
+[youtube](https://www.youtube.com/watch?v=4WmTRFZilj8&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=7) <br>
+- Valid for unique and clockwise rotated array.
 [pepcoding](https://www.youtube.com/watch?v=JUYjIZjz6js)
 ```python
 # Only valid if array is rotated in clockwise fashion
@@ -98,14 +99,14 @@ def findMin(self, arr: List[int]) -> int:
 ```
 
 ## Find an element in a rotated sorted array
-[youtube](https://www.youtube.com/watch?v=Id-DdcWb5AU&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=8)
-[leetcode](https://leetcode.com/problems/search-in-rotated-sorted-array/submissions/)
+[youtube](https://www.youtube.com/watch?v=Id-DdcWb5AU&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=8) <br>
+[leetcode](https://leetcode.com/problems/search-in-rotated-sorted-array/submissions/) <br>
 - Idea is based on finding the index of minimum element
 - Once we got that we can call 2 binary search to both the sorted halves
 
 ## Search in almost sorted array
-[gfg](https://www.geeksforgeeks.org/search-almost-sorted-array/)
-[youtube](https://www.youtube.com/watch?v=W3-KgsCVH1U&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=10)
+[gfg](https://www.geeksforgeeks.org/search-almost-sorted-array/) <br>
+[youtube](https://www.youtube.com/watch?v=W3-KgsCVH1U&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=10) <br>
 ```python
 def search_almost(arr, n, item):
     low = 0
@@ -126,8 +127,8 @@ def search_almost(arr, n, item):
 ```
 
 ## Ceil and Floor in Sorted Array (Easy)
-[youtube_floor](https://www.youtube.com/watch?v=5cx0xerA8XY&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=10)
-[youtube_ceil](https://www.youtube.com/watch?v=uiz0IxPCUeU&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=11)
+[youtube_floor](https://www.youtube.com/watch?v=5cx0xerA8XY&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=10) <br>
+[youtube_ceil](https://www.youtube.com/watch?v=uiz0IxPCUeU&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=11) <br>
 
 ## Next Alphabetical Element
 [youtube](https://www.youtube.com/watch?v=X45c37QMdX0&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=12)
@@ -177,9 +178,12 @@ def min_diff_element(arr, n, key):
             low = mid + 1
         else:
             high = mid - 1
-    if low >=0 and high < n:
+    if low >=0 and high <= n-1:
         # Answer lies in range
-        return min(abs(arr[low]-key), abs(arr[high]-key))
+        if abs(arr[low]-key) < abs(arr[high]-key):
+            return arr[low]
+        else:
+            return arr[high]
     elif low >= 0:
         # It will happen, when high goes out of bound
         return arr[low]
@@ -189,15 +193,15 @@ def min_diff_element(arr, n, key):
 ```
 
 # Binary Search on answer
+[youtube](https://www.youtube.com/watch?v=IZP_8-JZqhM&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=16) <br>
 - Can apply binary search on unsorted array
 - We develop a criteria to decide
     - Whether mid is answer or not,
     - If mid is not answer, then another criteria to identify which side to move
-[youtube](https://www.youtube.com/watch?v=IZP_8-JZqhM&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=16)
 
 ## Index of Peak Element
-- Better code in GFG lectures. Writing gfg code below
 [youtube](https://www.youtube.com/watch?v=OINnBJTRrMU&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=17)
+- Better code in GFG lectures. Used GFG lecture code below
 ```python
 def peak(arr, n):
     low = 0
@@ -215,14 +219,14 @@ def peak(arr, n):
 ```
 
 ## Bitonic Point = Same as finding a peak element in array
-[youtube](https://www.youtube.com/watch?v=BrrZL1RDMwc&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=19)
+[youtube](https://www.youtube.com/watch?v=BrrZL1RDMwc&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=19) <br>
 [gfg](https://practice.geeksforgeeks.org/problems/maximum-value-in-a-bitonic-array3001/1)
 
 ## Search in Bitonic Array
-[youtube](https://www.youtube.com/watch?v=IjaP8qt1IYI&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=19)
-- Find Bitonic Point index = `index`
-- BinarySearchAscOrder(arr, 0, index-1)
-- BinarySearchDescOrder(arr, index, n-1)
+[youtube](https://www.youtube.com/watch?v=IjaP8qt1IYI&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=19) <br>
+- Find Bitonic Element index = `index`
+- BinarySearchAscOrder(arr, 0, `index-1`)
+- BinarySearchDescOrder(arr, `index`, n-1)
 
 ## Search in Row-wise and Column-wise sorted array
 [youtube](https://www.youtube.com/watch?v=VS0BcOiKaGI&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=20)
@@ -256,7 +260,7 @@ print(search(arr, n, m, key))
 ```
 
 ## Allocate Minimum Number Of Pages
-[gfg](https://www.geeksforgeeks.org/allocate-minimum-number-pages/)
+[gfg](https://www.geeksforgeeks.org/allocate-minimum-number-pages/) <br>
 [youtube](https://www.youtube.com/watch?v=2JSQIhPcHQg&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2&index=21)
 ```python
 def isvalid(arr, n, k, mid):
@@ -288,11 +292,11 @@ def allocate_pages(arr, n, k):
             low = mid + 1
 ```
 Related Problems:
-[Painter Partition Problem](https://www.geeksforgeeks.org/painters-partition-problem/)
-[1482-leetcode](https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/)
-[1283 Find the Smallest Divisor Given a Threshold](https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/)
-[1231 Divide Chocolate](https://leetcode.ca/all/1231.html)
-[1011. Capacity To Ship Packages Within D Days](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/)
-[875. Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/)
-[410. Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/)
-[774 Max Distance to Gas Station](https://leetcode.ca/all/774.html)
+[Painter Partition Problem](https://www.geeksforgeeks.org/painters-partition-problem/) <br>
+[1482-leetcode](https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/) <br>
+[1283 Find the Smallest Divisor Given a Threshold](https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/) <br>
+[1231 Divide Chocolate](https://leetcode.ca/all/1231.html) <br>
+[1011. Capacity To Ship Packages Within D Days](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/) <br>
+[875. Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/) <br>
+[410. Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/) <br>
+[774 Max Distance to Gas Station](https://leetcode.ca/all/774.html) <br>
