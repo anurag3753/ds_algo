@@ -29,20 +29,20 @@ REST-compliant systems, often called RESTful systems, are characterized by how t
 - APIs tells you what is the request and corresponding response structure.
 
 ### REST Design Principles
-Uniform Interface:
-    - All API requests for the same resource should look the same, no matter where the request comes from. 
-    - The REST API should ensure that the same piece of data, such as the name or email address of a user, belongs to only one uniform resource identifier(URI). 
-    - Resources shouldn't be too large but should contain every piece of information that the client might need.
-Server-client decoupling
-Statelessness
-Cacheability:
-    - When possible, resources should be cacheable on the client or server side.
-    - Server responses also need to contain information about whether caching is allowed for delivered resource.
-    - The goal is to improve performance on the client side, while increasing scalability on the server side.
-Layered System Architecture:
-    - In REST APIs, the calls and responses go through different layers.
-    - As a rule of thumb, don't assume that the client and server applications connect directly to each other.
-    - There may be a number of different intermediaries in the communication loop.
+- Uniform Interface: <br>
+    - All API requests for the same resource should look the same, no matter where the request comes from. <br>
+    - The REST API should ensure that the same piece of data, such as the name or email address of a user, belongs to only one uniform resource identifier(URI). <br>
+    - Resources shouldn't be too large but should contain every piece of information that the client might need. <br>
+- Server-client decoupling <br>
+- Statelessness <br>
+- Cacheability: <br>
+    - When possible, resources should be cacheable on the client or server side. <br>
+    - Server responses also need to contain information about whether caching is allowed for delivered resource. <br>
+    - The goal is to improve performance on the client side, while increasing scalability on the server side. <br>
+- Layered System Architecture: <br>
+    - In REST APIs, the calls and responses go through different layers. <br>
+    - As a rule of thumb, don't assume that the client and server applications connect directly to each other. <br>
+    - There may be a number of different intermediaries in the communication loop. <br>
 
 ### Separation of Client and Server
 - In the REST architectural style, the implementation of the client and the implementation of the server can be done independently w/o each knowing about the other.
