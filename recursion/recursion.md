@@ -142,6 +142,9 @@ def toh(n, s, d, h):    # source to destination using helper
 toh(3, "a", "b", "c")
 ```
 
+# IP-OP Method
+![IP-OP Method](https://github.com/anurag3753/ds_algo/blob/main/images/ip_op.JPG)
+
 ## Print all subsets
 [youtube](https://www.youtube.com/watch?v=Yg5a2FxU4Fo&list=PL_z_8CaSLPWeT1ffjiImo0sYTcnLzo-wY&index=12)
 ```python
