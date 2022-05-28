@@ -101,3 +101,72 @@ def dice_roll_helper(n, op):
 def dice_roll(n):
     dice_roll(3, [])
 ```
+### Roll n dices and produce all possible outcomes that sum upto a desired sum
+```python
+def dice_desired_sum_helper(dice, desired_sum, sum_so_far, choices):
+    if dice == 0 and sum_so_far == desired_sum:
+        print(choices)
+    else:
+        # min_limit = sum_so_far + 1*(dice-1)
+        # max_limit = sum_so_far + 6*(dice-1)
+        for i in range(1, 7):
+            if (sum_so_far + i + 1*(dice-1) <= desired_sum <= 
+                sum_so_far + i + 6*(dice-1)):    
+                # choose
+                choices.append(i)
+                # explore
+                dice_desired_sum_helper(dice-1, desired_sum, sum_so_far+i, choices)
+                # unchoose
+                choices.pop()
+
+def dice_desired_sum(n, desired_sum):
+    dice_desired_sum_helper(3, 15, 0, [])
+
+dice_desired_sum(3, 15)
+```
+### Generate all permutations of a string
+[article](https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/)
+```python
+def permute_helper(string, chosen):
+    if string == "":
+        logger.debug("\n" + str(chosen) + "\n")
+    else:
+        for i in range(len(string)):
+            # choose
+            char = string[i]
+            left_substr = string[0:i]
+            right_substr = string[i+1:]
+            rest = left_substr + right_substr
+            # explore
+            permute_helper(rest, chosen+char)
+            # unchoose
+            # N/A as string in python are immutable
+            # so every time we make a call, we create a new string
+            # and that is the reason, we need not remember choices
+def permute(string):
+    permute_helper(string, "")
+
+permute("abc")
+```
+### Generate all permutations of a list of numbers
+```python
+# Permutations of a list of numbers
+def permute_numbers_helper(li, chosen):
+    if len(li) == 0:
+        logger.debug("\n" + str(chosen) + "\n")
+    else:
+        for i in range(len(li)):
+            # choose
+            choice = li.pop(i)      # remove value at index i and return it
+            chosen.append(choice)               
+            # explore
+            permute_numbers_helper(li, chosen)
+            # unchoose
+            li.insert(i, choice)
+            chosen.pop()            # remove last value of chosen
+
+def permute_numbers(li):
+    permute_numbers_helper(li, [])
+
+permute_numbers([1,2,3])
+```
