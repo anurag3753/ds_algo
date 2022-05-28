@@ -170,3 +170,44 @@ def permute_numbers(li):
 
 permute_numbers([1,2,3])
 ```
+### Generate all subsets of a list of names
+```python
+# approach 1
+def sublists(list_of_people, chosen):
+    if len(list_of_people) == 0:
+        print(chosen)
+    else:
+        op1 = chosen.copy()
+        op2 = chosen.copy()
+        op2.append(list_of_people[0])
+        list_of_people = list_of_people[1:]
+
+        sublists(list_of_people, op1)
+        sublists(list_of_people, op2)
+
+li = ["anurag", "sumit", "amit"]
+sublists(li, [])
+```
+```python
+# approach 2
+def sublists_helper(list_of_people, chosen):
+    if len(list_of_people) == 0:
+        print(chosen)
+    else:
+        # choose
+        choice = list_of_people.pop(0)              # pull first person out of vector
+        # explore
+        chosen.append(choice)                       # add him in choice list
+        sublists_helper(list_of_people, chosen)     # explore
+
+        chosen.pop()                                # do not include in choice list
+        sublists_helper(list_of_people, chosen)     # explore
+        # # unchoose
+        list_of_people.insert(0, choice)            # insert back at index 0
+
+def sublists2(list_of_people):
+    sublists_helper(list_of_people, [])
+
+li = ["anurag", "sumit", "amit"]
+sublists2(li)
+```
