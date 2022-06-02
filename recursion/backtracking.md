@@ -170,6 +170,10 @@ def permute_numbers(li):
 
 permute_numbers([1,2,3])
 ```
+## Other Approaches [For generating permutations]
+[tutorial](https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/)
+[video](https://www.youtube.com/watch?v=jRyQVVvYBAM&list=PLjkkQ3iH4jy82KRn9jXeFyWzvX7sqYrjE&index=9)
+
 ### Generate all subsets of a list of names
 ```python
 # approach 1
@@ -211,3 +215,6 @@ def sublists2(list_of_people):
 li = ["anurag", "sumit", "amit"]
 sublists2(li)
 ```
+## Other Approaches [For generating subsets]
+[tutorial](https://github.com/LeadCoding/FrazArmy/blob/main/Recursion/lecture%207/Fraz_recursion_7_2.py)
+[video](https://www.youtube.com/watch?v=0N3RCWa8jFM&list=PLjkkQ3iH4jy82KRn9jXeFyWzvX7sqYrjE&index=9)
