@@ -218,3 +218,31 @@ sublists2(li)
 ## Other Approaches [For generating subsets]
 [tutorial](https://github.com/LeadCoding/FrazArmy/blob/main/Recursion/lecture%207/Fraz_recursion_7_2.py)
 [video](https://www.youtube.com/watch?v=0N3RCWa8jFM&list=PLjkkQ3iH4jy82KRn9jXeFyWzvX7sqYrjE&index=9)
+
+### Generate all subsets with duplicate elements present [Learning]
+[video](https://www.youtube.com/watch?v=u40eYbmT9zg&list=PLjkkQ3iH4jy82KRn9jXeFyWzvX7sqYrjE&index=11)
+```python
+def subset_helper(ip, op, i):
+    if i == len(ip):
+        print(op)
+    else:
+        op.append(ip[i])
+        subset_helper(ip, op, i+1)
+        op.pop()
+        ## condition to handle duplicate elements
+        while i+1 < len(ip) and ip[i] == ip[i+1]:
+            i += 1
+        # skip the element
+        subset_helper(ip, op, i+1)
+
+def subset(ip):
+    op = []
+    start_index = 0
+    # to bring all duplicates at same place
+    ip.sort()
+    subset_helper(ip, op, start_index)
+
+ip = [1,2,2]
+ip = [1,2,3,2]
+subset(ip)
+```
