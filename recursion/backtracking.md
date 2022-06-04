@@ -246,3 +246,81 @@ ip = [1,2,2]
 ip = [1,2,3,2]
 subset(ip)
 ```
+### Choose k elements from a set of elements
+[video](https://www.youtube.com/watch?v=DTFy9spEQGo&list=PLjkkQ3iH4jy82KRn9jXeFyWzvX7sqYrjE&index=13)
+```python
+# ip = [1,2,3,4], k = 2 op = [(1,2), (1,3) ... (2,3) ... (3,4)]
+def combination_helper(ip, op, i, k):
+    if k == 0:
+        print(op)
+        return
+    # remaining elements (n - i + 1)
+    # k = required elements
+    if k > len(ip) - i + 1: return 
+    if i == len(ip): return
+    else:
+        op.append(ip[i])
+        combination_helper(ip, op, i+1, k-1)        # element selected, hence k-1
+        op.pop()
+        ## condition to handle duplicate elements
+        while i+1 < len(ip) and ip[i] == ip[i+1]:
+            i += 1
+        # skip the element
+        combination_helper(ip, op, i+1, k)          # element not selected, hence k 
+
+def combination(ip, k):
+    op = []
+    start_index = 0
+    # to bring all duplicates at same place
+    ip.sort()
+    combination_helper(ip, op, start_index, k)
+
+# ip = [1,2,2]
+ip = [1,2,3,2]
+combination(ip, 2)
+```
+### Choose with a desired sum (numbers can be repeated infinite times)
+[video](https://www.youtube.com/watch?v=Hca7284gCpI&list=PLjkkQ3iH4jy82KRn9jXeFyWzvX7sqYrjE&index=13)
+```python
+def infsum(ip, op, i, ds):
+    if ds == 0: print(op)
+    elif ds < 0: return
+    elif i == len(ip) : return
+    else:
+        # do not pick
+        infsum(ip, op, i+1, ds)     # we are not chossing it now, so in future also we will not choose it 
+        # pick it
+        op.append(ip[i])
+        infsum(ip, op, i, ds-ip[i]) # in future also, we can choose it
+        op.pop()
+
+ip = [1,2,3]
+desired_sum = 5
+infsum(ip, [], 0, desired_sum)
+```
+### Choose with a desired sum (numbers to be chosen from array and numbers can be repeated in array)
+[video](https://www.youtube.com/watch?v=6fARitpO0p8&list=PLjkkQ3iH4jy82KRn9jXeFyWzvX7sqYrjE&index=14)
+```python
+def target_helper(ip, op, i, ds):
+    if ds == 0: print(op)
+    elif ds < 0: return
+    elif i == len(ip) : return
+    else:
+        # pick it
+        op.append(ip[i])
+        target_helper(ip, op, i+1, ds-ip[i])
+        op.pop()
+        ## condition to handle duplicate elements
+        while i+1 < len(ip) and ip[i] == ip[i+1]:
+            i += 1
+        # skip the element
+        target_helper(ip, op, i+1, ds) 
+
+def target_sum(ip, desired_sum):
+    ip.sort()   # to bring the same element together
+    target_helper(ip, [], 0, desired_sum)
+
+ip = [1,2,3,1]
+desired_sum = 5
+target_sum(ip, desired_sum)
+```
