@@ -324,3 +324,153 @@ ip = [1,2,3,1]
 desired_sum = 5
 target_sum(ip, desired_sum)
 ```
+### Letter Combinations of a Phone Number
+[video](https://www.youtube.com/watch?v=qyHlIdxk820&list=PLjkkQ3iH4jy82KRn9jXeFyWzvX7sqYrjE&index=17)
+```python
+mydict = {
+    "2" : "abc", "3" : "def", "4" : "ghi",
+    "5" : "jkl", "6" : "mno", "7" : "pqrs",
+    "8" : "tuv", "9" : "wxyz"
+}
+
+def letter_combination(string, i, op):
+    if i == len(string):
+        print("".join(op))
+        return
+    sequence = mydict[string[i]]
+    for char in sequence:
+        op.append(char)
+        letter_combination(string, i+1, op)
+        # pop back
+        op.pop()
+    
+letter_combination("223", 0, [])
+```
+### Partition to K equal subsets
+[video](https://www.youtube.com/watch?v=h_6MldQ8vB8&list=PLjkkQ3iH4jy82KRn9jXeFyWzvX7sqYrjE&index=18)
+[question](https://www.codingninjas.com/codestudio/problems/partition-to-k-equal-sum-subsets_843262?)
+```python
+def equal_subset_sum_helper(i, k, nums_arr, chosen_arr, bucket_number, bucket_sum, required_sum):
+    if bucket_number == k+1: return True
+    if bucket_sum == required_sum:
+        return equal_subset_sum_helper(0, k, nums_arr, chosen_arr, bucket_number+1, 0, required_sum)  
+    elif bucket_sum > required_sum : return False
+    elif i == len(nums_arr) : return False
+
+    if chosen_arr[i] == 1:
+        return equal_subset_sum_helper(i+1, k, nums_arr, chosen_arr, bucket_number, bucket_sum, required_sum)
+    else:
+        # pick it
+        bucket_sum += nums_arr[i]
+        chosen_arr[i] = 1
+        ans1 = equal_subset_sum_helper(i+1, k, nums_arr, chosen_arr, bucket_number, bucket_sum, required_sum)
+        # leave it
+        bucket_sum -= nums_arr[i]
+        chosen_arr[i] = 0
+        ans2 = equal_subset_sum_helper(i+1, k, nums_arr, chosen_arr, bucket_number, bucket_sum, required_sum)
+
+        # final ans
+        return ans1 or ans2
+
+def equal_subset_sum(nums_arr, k):
+    chosen_arr = [0] * len(nums_arr)
+    arr_sum = sum(nums_arr)
+    if arr_sum % k != 0 : return False
+    required_sum = arr_sum//k
+    return equal_subset_sum_helper(0, k, nums_arr, chosen_arr, 1, 0, required_sum)
+
+nums_arr = [4, 3, 1, 3, 4, 3, 1, 2]
+k = 3   # number of buckets
+print(equal_subset_sum(nums_arr, k))
+```
+### Maximum length of a concatenated string with unique characters
+[video](https://www.youtube.com/watch?v=DIJQ8zLeVEk&list=PLjkkQ3iH4jy82KRn9jXeFyWzvX7sqYrjE&index=19)
+[question](https://www.codingninjas.com/codestudio/problems/string-concatination_2195424?)
+```python
+def not_repeating(string):
+# string has unique character ?         
+    char_arr = [0] * 26
+    for char in string:
+        if char_arr[ord(char) - ord("a")] == 0:
+            char_arr[ord(char) - ord("a")] = 1
+        else:
+            return False
+    return True
+
+def not_intersecting(string, chosen_arr):
+# char is already selected in the past
+    for char in string:
+        if chosen_arr[ord(char) - ord("a")] == 1:
+            return False
+    return True
+
+### Maximum length of a concatenated string with unique characters
+def string_concatenation_helper(arr, i, chosen, length):
+    if i == len(arr):
+        return length
+
+    # current string
+    curr_string = arr[i]
+
+    # condition check
+    if not (not_repeating(curr_string) and not_intersecting(curr_string, chosen)):
+        return string_concatenation_helper(arr, i+1, chosen, length)
+    else:
+        # choose
+        length += len(arr[i])
+        for char in arr[i]:
+            chosen[ord(char) - ord("a")] = 1
+        ans1 = string_concatenation_helper(arr, i+1, chosen, length)
+
+        # not choose
+        length -= len(arr[i])
+        for char in arr[i]:
+            chosen[ord(char) - ord("a")] = 0
+        ans2 = string_concatenation_helper(arr, i+1, chosen, length)
+
+        return max(ans1,ans2)
+
+def string_concatenation(arr):
+    i = 0
+    chosen = [0] * 26
+    length = 0
+    return string_concatenation_helper(arr, i, chosen, length)
+
+print(string_concatenation(["cha", "r" , "act", "ers"]))
+print(string_concatenation(["char", "r" , "actrbc", "errs"]))
+```
+### Flood fill algorithm | Recursion
+[video](https://www.youtube.com/watch?v=RjO-HDjRMpM&list=PLjkkQ3iH4jy82KRn9jXeFyWzvX7sqYrjE&index=21)
+[question](https://www.codingninjas.com/codestudio/problems/flood-fill-algorithm_1089687)
+```python
+def flood_fill_helper(image, i, j, new_color, old_color):
+    if i < 0 or j < 0 or i == len(image) or j == len(image[0]) or image[i][j] != old_color: return
+    image[i][j] = new_color
+    flood_fill_helper(image, i+1, j, new_color, old_color)
+    flood_fill_helper(image, i-1, j, new_color, old_color)
+    flood_fill_helper(image, i, j+1, new_color, old_color)
+    flood_fill_helper(image, i, j-1, new_color, old_color)
+
+def flood_fill(image, x, y, new_color):
+    old_color = image[x][y]
+    if new_color == old_color:
+        return
+    flood_fill_helper(image, x, y, new_color, old_color)
+
+## Client Code
+image = [
+    [1,2,1,2,3,5],
+    [1,2,2,4,3,4],
+    [1,2,4,4,5,4],
+    [6,2,2,2,3,4],
+    [7,6,1,3,3,3],
+]
+
+x = 3
+y = 2
+new_color = 4
+
+print(image)    # old image color
+flood_fill(image, x, y, new_color)
+print(image)    # new image color
+```
